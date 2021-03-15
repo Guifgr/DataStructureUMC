@@ -34,7 +34,7 @@ namespace QuickSort
             j = r + 1;
             while (i < j)
             {
-             //Parei aqui
+             //todo
             }
             return j;
         }
