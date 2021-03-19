@@ -13,30 +13,63 @@ namespace QuickSort
                 Console.WriteLine("o "+(i+1)+"º número: ");
                 x[i] = Convert.ToInt64(Console.ReadLine());
             }
-            for (i = 0; i <= 9; i++)
+            
+            QuickSort(x, 0, 9);
+
+            long j = 8;
+            for (i = 9; i >= 0; i--)
             {
-                Console.WriteLine(i+1+"º número: "+x[i]);
+                Console.WriteLine(i-j+"º número: "+x[i]);
+                j-=2;
             }
+
+            
         }
 
-        public long[] Troca(long[] x, long i, long j){
+        public static long[] Troca(long[] x, long i, long j){
             var aux = x[i];
             x[i] = x[j];
             x[j] = aux;
             return x;
         }
 
-        public long particao(long[] x, long p, long r)
+        public static long Particao(long[] x, long p, long r)
         {
-            long pivo, i, j;
-            pivo = x[(p + r) / 2];
-            i = p - 1;
-            j = r + 1;
+            var pivo = x[(p + r) / 2];
+            var i = p - 1;
+            var j = r + 1;
+            
             while (i < j)
             {
-             //todo
+                do
+                {
+                    j -= 1;
+
+                } while (x[j] < pivo);
+                
+                do
+                {
+                    i += 1;
+
+                } while (x[i] > pivo);
+
+                if (i<j)
+                {
+                    Troca(x, i, j);
+                }
             }
             return j;
+        }
+
+        public static long[] QuickSort(long[] x, long p, long r)
+        {
+            if (p < r)
+            {
+                var q = Particao(x, p, r);
+                QuickSort(x, p, q);
+                QuickSort(x, q + 1, r);
+            }
+            return x;
         }
  
     }
